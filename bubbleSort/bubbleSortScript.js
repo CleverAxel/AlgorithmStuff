@@ -28,10 +28,11 @@ function SortArray(){
         if(arrayRandom[i].value > arrayRandom[i+1].value){
             swappedOccured = true;
             let tallerRodStyle = arrayRandom[i].rod.style.left;
-            let smallerRod = arrayRandom[i+1].rod.style.left;
+            let smallerRodStyle = arrayRandom[i+1].rod.style.left;
 
-            arrayRandom[i].rod.style.left = smallerRod;
+            arrayRandom[i].rod.style.left = smallerRodStyle;
             arrayRandom[i+1].rod.style.left = tallerRodStyle;
+
             temporaryVar = arrayRandom[i];
             arrayRandom[i] = arrayRandom[i+1];
             arrayRandom[i+1] = temporaryVar;
@@ -41,7 +42,7 @@ function SortArray(){
             i++;
             setTimeout(() => {
                 LoopRecursion();
-            }, 5);
+            }, 1);
         }else{
             if(swappedOccured){
                 SortArray();
@@ -50,24 +51,6 @@ function SortArray(){
     }
 
 }
-
-/*sortTest()
-console.log(arrayRandom)
-function sortTest(){
-    let tempVar = 0;
-    let swapped = false;
-    for(let i = 0; i < arrayRandom.length-1; i++){
-        if(arrayRandom[i].value > arrayRandom[i+1].value){
-            swapped = true;
-            tempVar = arrayRandom[i];
-            arrayRandom[i] = arrayRandom[i+1];
-            arrayRandom[i+1] = tempVar;
-        }
-    }
-    if(swapped){
-        sortTest();
-    }
-}*/
 
 /*while(!true != !false){
     let swapped = false;
