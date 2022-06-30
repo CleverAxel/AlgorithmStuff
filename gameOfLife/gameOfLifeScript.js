@@ -12,7 +12,7 @@ CONTAINER_TABLE.style.width = (SIZE_CELL * NBR_COLUMNS).toString()+"px";
 const CELL_ON = 1;
 const CELL_OFF = 0;
 
-const TIMER_INTERVAL = 200;
+let TIMER_INTERVAL = 200;
 
 let isMouseDown = false;
 document.addEventListener("mousedown", () => {
