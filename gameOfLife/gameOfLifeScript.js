@@ -1,12 +1,27 @@
+const CONTAINER_TABLE = document.querySelector(".containerTable");
 const TABLE = document.getElementById("table");
 const GENERATION_COUNTER = document.querySelector(".generationCounter");
-const NBR_COLUMNS = 30;
-const NBR_ROWS = 20;
+
+
+const NBR_COLUMNS = 70;
+const NBR_ROWS = 50;
+const SIZE_CELL = 15;
+
+CONTAINER_TABLE.style.width = (SIZE_CELL * NBR_COLUMNS).toString()+"px";
 
 const CELL_ON = 1;
 const CELL_OFF = 0;
 
 const TIMER_INTERVAL = 200;
+
+let isMouseDown = false;
+document.addEventListener("mousedown", () => {
+    isMouseDown = true;
+});
+
+document.addEventListener("mouseup", () => {
+    isMouseDown = false;
+});
 
 
 let matrixTable = CreateMatrix();
@@ -169,8 +184,24 @@ function CreateTable(){
         for(let j = 0; j < NBR_COLUMNS; j++){
             let column = document.createElement("td");
             column.classList.add("cell");
+            column.style.width = SIZE_CELL.toString() + "px";
+            column.style.height = SIZE_CELL.toString() + "px";
 
             let index = i * NBR_COLUMNS + j;
+
+            column.addEventListener("mouseenter", () => {
+                if(isMouseDown){
+                    if(matrixTable[i][j] == CELL_OFF){
+                        matrixTable[i][j] = CELL_ON;
+                        column.classList.add("cellOn");
+                        cellAliveToCheck.push(index);
+                    }else{
+                        matrixTable[i][j] = CELL_OFF;
+                        column.classList.remove("cellOn");
+                        cellAliveToCheck = cellAliveToCheck.filter(x => x != index);
+                    }
+                }
+            })
 
             column.addEventListener("click", () => {
                 if(matrixTable[i][j] == CELL_OFF){
